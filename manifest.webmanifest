@@ -1,0 +1,17 @@
+{
+ "name": "DG Stability Computer",
+ "short_name": "DG Stability",
+ "description": "Ship loading and stability computer (not class approved; for study and pre-planning only).",
+ "lang": "tr",
+ "start_url": "./index.html",
+ "scope": "./",
+ "display": "standalone",
+ "orientation": "any",
+ "background_color": "#012d69",
+ "theme_color": "#012d69",
+ "icons": [
+  {"src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+  {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+  {"src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+ ]
+}
