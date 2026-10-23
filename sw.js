@@ -1,5 +1,5 @@
 /* DG Stability Computer — service worker. Sayfa: once ag (guncel), yoksa onbellek. Surum build sirasinda damgalanir. */
-const V='dgsc-5c5a10c5b5';
+const V='dgsc-f2483e46cb';
 const FILES=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./icon-maskable-512.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>Promise.all(FILES.map(f=>fetch(f,{cache:'reload'}).then(r=>c.put(f,r))))).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x.startsWith('dgsc-')&&x!==V).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
