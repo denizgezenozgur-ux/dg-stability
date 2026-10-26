@@ -1653,7 +1653,7 @@ WZ.fix2=(x,opt)=>{opt=opt||{};const G=WZ.groups(),maxMoves=opt.maxMoves||30;calc
   for(let i=0;i<8;i++){const mid=(lo+hi)/2;setg(m.g,m.from+(m.to-m.from)*mid);calc();ok(wzV(x))?hi=mid:lo=mid}
   setg(m.g,Math.round((m.from+(m.to-m.from)*hi)*10)/10);calc();if(!ok(wzV(x))){setg(m.g,m.to);calc()}}
  if(wzV(x).obj>1e-9){ // coordinate refinement with fine steps
-  for(let pass=0;pass<4;pass++){let imp=false;for(const g of G){for(const st of [20,10,5,2,1]){for(const sg of [1,-1]){const p0=lvl(g),q=Math.max(0,Math.min(100,p0+sg*st));if(Math.abs(q-p0)<.05||(opt.down&&q>p0))continue;const base=wzV(x),b0=sc(base,0);setg(g,q);calc();const v=wzV(x);if(sc(v,0)<b0-1e-9){imp=true}else{setg(g,p0);calc()}}}}if(!imp)break}}
+  for(let pass=0;pass<6;pass++){let imp=false;for(const g of G){for(const st of [20,10,5,2,1,.5,.2,.1]){for(const sg of [1,-1]){const p0=lvl(g),q=Math.max(0,Math.min(100,p0+sg*st));if(Math.abs(q-p0)<.05||(opt.down&&q>p0))continue;const base=wzV(x),b0=sc(base,0);setg(g,q);calc();const v=wzV(x);if(sc(v,0)<b0-1e-9){imp=true}else{setg(g,p0);calc()}}}}if(!imp)break}}
  return{solved:wzV(x).hard<=1e-9,v:wzV(x)}};
 WZ.deballast2=(x)=>{const G=WZ.groups().filter(g=>g.some(t=>fill[t.id]>.05));G.sort((a,b)=>WZ.gw(b,fill[b[0].id])-WZ.gw(a,fill[a[0].id]));
  for(const g of G){const p0=fill[g[0].id];g.forEach(t=>fill[t.id]=0);calc();let v=wzV(x);if(v.hard>1e-9||v.soft>1e-9){let lo=0,hi=p0;for(let i=0;i<8;i++){const m=(lo+hi)/2;g.forEach(t=>fill[t.id]=m);calc();const w=wzV(x);(w.hard<=1e-9&&w.soft<=1e-9)?hi=m:lo=m}g.forEach(t=>fill[t.id]=Math.min(p0,Math.round(hi*10)/10));calc()}}
